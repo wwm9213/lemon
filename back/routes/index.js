@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 var mongod = require('mongodb-curd');
 var db = 'myLemon';
-var userCol = 'user';
-var billCol = 'bill';
+var userCol = 'user'; //用户表
+var billCol = 'bill'; //账单表
 
 /* 注册 */
 router.post('/api/userlist', function(req, res, next) {
@@ -77,6 +77,19 @@ router.post('/api/findBill', function(req, res, next) {
     }, {
         skip: (page - 1) * limit,
         limit: limit
+    })
+})
+
+//删除账单
+router.post('/api/delBill', function(req, res, next) {
+    var parms = req.body,
+        _id = parms.id;
+    mongod.remove(db, billCol, { '_id': _id }, function(result) {
+        if (!result) {
+            res.json({ code: 0, msg: '删除失败' });
+        } else {
+            res.json({ code: 1, msg: '删除成功' });
+        }
     })
 })
 
