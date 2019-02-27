@@ -128,9 +128,8 @@ router.post('/api/getClassify', function(req, res, next) {
 //添加icon图标
 router.post('/api/addIcon', function(req, res, next) {
     var parms = req.body,
-        icon = prams.icon
-    iconName = parms.iconName;
-    mongod.insert(db, iconCol, { 'icon': icon, 'iconName': iconName }, function(result) {
+        icon = parms.icon;
+    mongod.insert(db, iconCol, { 'icon': icon }, function(result) {
         if (!result) {
             res.json({ code: 0, msg: '添加失败' });
         } else {
