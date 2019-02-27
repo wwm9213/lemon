@@ -139,8 +139,8 @@ router.post('/api/addIcon', function(req, res, next) {
 })
 
 //获取所有icon图标
-router.get('/api/getIcon ', function(req, res, next) {
-    mongod.insert(db, iconCol, function(result) {
+router.get('/api/getIcon', function(req, res, next) {
+    mongod.find(db, iconCol, function(result) {
         if (!result) {
             res.json({ code: 0, msg: '没有数据' });
         } else {
